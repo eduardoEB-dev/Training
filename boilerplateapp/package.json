@@ -1,0 +1,39 @@
+{
+    "name": "boilerplateapp",
+    "version": "1.0.0",
+    "description": "",
+    "main": "src/index.tsx",
+    "scripts": {
+        "start": "webpack serve --config webpack.config.js --env env=development",
+        "build": "webpack --config webpack.config.js --env env=production"
+    },
+    "author": "Try Catch Angler",
+    "license": "ISC",
+    "dependencies": {
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "swr": "^2.1.0",
+        "zustand": "^4.3.6"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.18.10",
+        "@babel/core": "^7.18.10",
+        "@babel/plugin-transform-runtime": "^7.18.10",
+        "@babel/preset-env": "^7.18.10",
+        "@babel/preset-react": "^7.18.6",
+        "@babel/preset-typescript": "^7.18.6",
+        "@babel/runtime": "^7.18.9",
+        "@types/react": "^18.0.28",
+        "@types/react-dom": "^18.0.11",
+        "@types/react-scroll": "^1.8.6",
+        "babel-loader": "^8.2.5",
+        "clean-webpack-plugin": "^4.0.0",
+        "css-loader": "^6.7.1",
+        "html-webpack-plugin": "^5.5.0",
+        "style-loader": "^3.3.1",
+        "typescript": "^4.9.5",
+        "webpack": "^5.74.0",
+        "webpack-cli": "^4.10.0",
+        "webpack-dev-server": "^4.10.0"
+    }
+}
