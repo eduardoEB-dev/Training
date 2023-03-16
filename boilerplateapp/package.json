@@ -10,6 +10,7 @@
     "author": "Try Catch Angler",
     "license": "ISC",
     "dependencies": {
+        "@pnp/pnpjs": "2.10.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "swr": "^2.1.0",
