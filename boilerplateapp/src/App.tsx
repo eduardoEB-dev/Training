@@ -1,7 +1,7 @@
-import React from 'react';
+import { FC } from 'react';
 import useSPPnP from './utils/useSPPnP';
 
-const App = () => {
+const App: FC = () => {
     const { userProfile } = useSPPnP();
 
     return <>{`Welcome ${userProfile?.Title}`}</>;
