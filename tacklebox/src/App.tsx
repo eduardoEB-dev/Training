@@ -1,7 +1,10 @@
 import React from 'react';
+import useSPPnP from './utils/useSPPnP';
 
 const App = () => {
-    return <div>App</div>;
+    const { userProfile } = useSPPnP();
+
+    return <>{`Welcome ${userProfile?.Title}`}</>;
 };
 
 export default App;
