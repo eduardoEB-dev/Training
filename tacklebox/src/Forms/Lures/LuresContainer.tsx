@@ -7,8 +7,23 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import TextField from '@mui/material/TextField';
+import FormLabel from '@mui/material/FormLabel';
+import RadioGroup from '@mui/material/RadioGroup';
+import Radio from '@mui/material/Radio';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 const LuresContainer: FC = () => {
+    const yesNoObject = [
+        { label: 'Yes', value: 'true' },
+        { label: 'No', value: 'false' }
+    ];
+
+    const lureTypes = [
+        { label: 'Jig', value: 'Jig' },
+        { label: 'Spinners', value: 'Spinners' },
+        { label: 'Spoons', value: 'Spoons' }
+    ];
+
     return (
         <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
@@ -43,9 +58,11 @@ const LuresContainer: FC = () => {
                             label='Lure Type'
                             // onChange={handleChange}
                         >
-                            <MenuItem value={'Jig'}>Jig</MenuItem>
-                            <MenuItem value={'Spinners'}>Spinners</MenuItem>
-                            <MenuItem value={'Spoons'}>Spoons</MenuItem>
+                            {lureTypes.map((option) => (
+                                <MenuItem value={option.value}>
+                                    {option.label}
+                                </MenuItem>
+                            ))}
                         </Select>
                     </FormControl>
                 </Grid>
@@ -68,6 +85,26 @@ const LuresContainer: FC = () => {
                         defaultValue=''
                         variant='standard'
                     />
+                </Grid>
+                <Grid item xs={6}>
+                    <FormControl>
+                        <FormLabel id='inventory-group-label'>
+                            Running Low?
+                        </FormLabel>
+                        <RadioGroup
+                            row
+                            aria-labelledby='inventory-group-label'
+                            name='inventory-buttons-group'
+                        >
+                            {yesNoObject.map((option) => (
+                                <FormControlLabel
+                                    value={option.value}
+                                    control={<Radio />}
+                                    label={option.label}
+                                />
+                            ))}
+                        </RadioGroup>
+                    </FormControl>
                 </Grid>
             </Grid>
         </Box>
