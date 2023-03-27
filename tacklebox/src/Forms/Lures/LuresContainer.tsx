@@ -87,6 +87,26 @@ const LuresContainer: FC = () => {
                     />
                 </Grid>
                 <Grid item xs={6}>
+                    <TextField
+                        required
+                        fullWidth
+                        id='Length'
+                        label='Length'
+                        defaultValue=''
+                        variant='standard'
+                    />
+                </Grid>
+                <Grid item xs={6}>
+                    <TextField
+                        required
+                        fullWidth
+                        id='Color'
+                        label='Color'
+                        defaultValue=''
+                        variant='standard'
+                    />
+                </Grid>
+                <Grid item xs={6}>
                     <FormControl>
                         <FormLabel id='inventory-group-label'>
                             Running Low?
