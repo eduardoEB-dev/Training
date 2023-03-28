@@ -12,11 +12,14 @@
     "dependencies": {
         "@emotion/react": "^11.10.6",
         "@emotion/styled": "^11.10.6",
+        "@hookform/resolvers": "^3.0.0",
         "@mui/material": "^5.11.13",
         "@pnp/pnpjs": "2.10.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
+        "react-hook-form": "^7.43.8",
         "swr": "^2.1.0",
+        "yup": "^1.0.2",
         "zustand": "^4.3.6"
     },
     "devDependencies": {
