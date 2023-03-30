@@ -80,7 +80,10 @@ const LuresContainer: FC = () => {
                                         {...field}
                                     >
                                         {lureTypes.map((option) => (
-                                            <MenuItem value={option.value}>
+                                            <MenuItem
+                                                key={option.value}
+                                                value={option.value}
+                                            >
                                                 {option.label}
                                             </MenuItem>
                                         ))}
@@ -145,6 +148,7 @@ const LuresContainer: FC = () => {
                                     >
                                         {yesNoObject.map((option) => (
                                             <FormControlLabel
+                                                key={option.value}
                                                 value={option.value}
                                                 control={<Radio />}
                                                 label={option.label}

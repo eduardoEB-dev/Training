@@ -15,5 +15,11 @@ export const validationSchema = object()
     });
 
 export const defaultValues: LuresFormType = {
-    Title: ''
+    Title: '',
+    LureType: '',
+    Weight: '',
+    Depth: '',
+    Length: '',
+    Color: '',
+    RunningLow: false
 };
