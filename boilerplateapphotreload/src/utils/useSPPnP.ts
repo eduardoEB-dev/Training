@@ -31,6 +31,11 @@ const useSPPnP = (): UseSPPnPResult => {
                     urlSet = currentUrl.split('/SitePages/')[0];
                 } else if (currentUrl.includes('/SiteAssets/')) {
                     urlSet = currentUrl.split('/SiteAssets/')[0];
+                } else if (currentUrl.includes('localhost')) {
+                    const LocalUrl: string = 'http://localhost:8081/sites';
+                    const config = await import('../../config/private.json');
+                    const subUrl: string = config.siteUrl.split('sites/')[1];
+                    urlSet = `${LocalUrl}/${subUrl.split('/')[0]}`;
                 } else {
                     throw new Error('Invalid URL');
                 }
