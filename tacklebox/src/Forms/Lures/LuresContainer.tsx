@@ -18,6 +18,8 @@ import {
     validationSchema
 } from './Validation/Validation';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { addLure } from './api/postApi';
+import Button from '@mui/material/Button';
 
 const LuresContainer: FC = () => {
     const yesNoObject = [
@@ -36,131 +38,155 @@ const LuresContainer: FC = () => {
         defaultValues: defaultValues
     });
 
-    const { control, register, watch } = methods;
+    const onSubmit = async (data: LuresFormType) => {
+        await addLure(data);
+        alert('Form Submitted!');
+    };
+
+    const {
+        control,
+        handleSubmit,
+        register,
+        watch,
+        formState: { isDirty, isSubmitting }
+    } = methods;
 
     return (
         <FormProvider {...methods}>
-            <Box sx={{ flexGrow: 1 }}>
-                <pre style={{ fontSize: '12px' }}>
-                    {JSON.stringify(watch(), null, 2)}
-                </pre>
-                <Grid container spacing={2}>
-                    <Grid
-                        item
-                        xs={12}
-                        sx={{ display: 'flex', justifyContent: 'center' }}
-                    >
-                        <Typography variant='h6' gutterBottom>
-                            Lures Form
-                        </Typography>
+            <form onSubmit={handleSubmit(onSubmit)}>
+                <Box sx={{ flexGrow: 1 }}>
+                    <pre style={{ fontSize: '12px' }}>
+                        {JSON.stringify(watch(), null, 2)}
+                    </pre>
+                    <Grid container spacing={2}>
+                        <Grid
+                            item
+                            xs={12}
+                            sx={{ display: 'flex', justifyContent: 'center' }}
+                        >
+                            <Typography variant='h6' gutterBottom>
+                                Lures Form
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                fullWidth
+                                id='title'
+                                label='Lure Name'
+                                {...register('Title')}
+                                variant='standard'
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <Controller
+                                name='LureType'
+                                control={control}
+                                render={({ field }) => (
+                                    <FormControl fullWidth variant='standard'>
+                                        <InputLabel id='lure-type-select-label'>
+                                            Lure Type
+                                        </InputLabel>
+                                        <Select
+                                            labelId='lure-type-select-label'
+                                            id='lure-type-select'
+                                            label='Lure Type'
+                                            {...field}
+                                        >
+                                            {lureTypes.map((option) => (
+                                                <MenuItem
+                                                    key={option.value}
+                                                    value={option.value}
+                                                >
+                                                    {option.label}
+                                                </MenuItem>
+                                            ))}
+                                        </Select>
+                                    </FormControl>
+                                )}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                required
+                                fullWidth
+                                id='Weight'
+                                label='Weight'
+                                {...register('Weight')}
+                                variant='standard'
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                required
+                                fullWidth
+                                id='Depth'
+                                label='Depth'
+                                {...register('Depth')}
+                                variant='standard'
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                required
+                                fullWidth
+                                id='Length'
+                                label='Length'
+                                {...register('Length')}
+                                variant='standard'
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <TextField
+                                required
+                                fullWidth
+                                id='Color'
+                                label='Color'
+                                {...register('Color')}
+                                variant='standard'
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Controller
+                                name='RunningLow'
+                                control={control}
+                                render={({ field }) => (
+                                    <FormControl>
+                                        <FormLabel id='inventory-group-label'>
+                                            Running Low?
+                                        </FormLabel>
+                                        <RadioGroup
+                                            row
+                                            aria-labelledby='inventory-group-label'
+                                            {...field}
+                                        >
+                                            {yesNoObject.map((option) => (
+                                                <FormControlLabel
+                                                    key={option.value}
+                                                    value={option.value}
+                                                    control={<Radio />}
+                                                    label={option.label}
+                                                />
+                                            ))}
+                                        </RadioGroup>
+                                    </FormControl>
+                                )}
+                            />
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Button
+                                disabled={
+                                    !isDirty || isSubmitting ? true : false
+                                }
+                                type='submit'
+                                variant='contained'
+                            >
+                                Submit
+                            </Button>
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                        <TextField
-                            required
-                            fullWidth
-                            id='title'
-                            label='Lure Name'
-                            {...register('Title')}
-                            variant='standard'
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <Controller
-                            name='LureType'
-                            control={control}
-                            render={({ field }) => (
-                                <FormControl fullWidth variant='standard'>
-                                    <InputLabel id='lure-type-select-label'>
-                                        Lure Type
-                                    </InputLabel>
-                                    <Select
-                                        labelId='lure-type-select-label'
-                                        id='lure-type-select'
-                                        label='Lure Type'
-                                        {...field}
-                                    >
-                                        {lureTypes.map((option) => (
-                                            <MenuItem
-                                                key={option.value}
-                                                value={option.value}
-                                            >
-                                                {option.label}
-                                            </MenuItem>
-                                        ))}
-                                    </Select>
-                                </FormControl>
-                            )}
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            required
-                            fullWidth
-                            id='Weight'
-                            label='Weight'
-                            {...register('Weight')}
-                            variant='standard'
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            required
-                            fullWidth
-                            id='Depth'
-                            label='Depth'
-                            {...register('Depth')}
-                            variant='standard'
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            required
-                            fullWidth
-                            id='Length'
-                            label='Length'
-                            {...register('Length')}
-                            variant='standard'
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <TextField
-                            required
-                            fullWidth
-                            id='Color'
-                            label='Color'
-                            {...register('Color')}
-                            variant='standard'
-                        />
-                    </Grid>
-                    <Grid item xs={6}>
-                        <Controller
-                            name='RunningLow'
-                            control={control}
-                            render={({ field }) => (
-                                <FormControl>
-                                    <FormLabel id='inventory-group-label'>
-                                        Running Low?
-                                    </FormLabel>
-                                    <RadioGroup
-                                        row
-                                        aria-labelledby='inventory-group-label'
-                                        {...field}
-                                    >
-                                        {yesNoObject.map((option) => (
-                                            <FormControlLabel
-                                                key={option.value}
-                                                value={option.value}
-                                                control={<Radio />}
-                                                label={option.label}
-                                            />
-                                        ))}
-                                    </RadioGroup>
-                                </FormControl>
-                            )}
-                        />
-                    </Grid>
-                </Grid>
-            </Box>
+                </Box>
+            </form>
         </FormProvider>
     );
 };
